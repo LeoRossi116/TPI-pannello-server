@@ -1,16 +1,36 @@
-# React + Vite
+# Pannello Server
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Dashboard React per il monitoraggio dello stato, delle prestazioni e degli avvisi dei server della **Piattaforma Ordini**.
 
-Currently, two official plugins are available:
+## Funzionalità
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Intestazione di sistema**: mostra nome della piattaforma, data e ora dell'ultimo aggiornamento e rapporto tra server online e totali.
+- **Riepilogo metriche**: conteggio dei server per stato (`OK`, `Attenzione`, `Critici`, `Offline`), CPU media dei server online e server online con latenza più alta.
+- **Griglia server**: visualizzazione a schede con badge di stato, ruolo, sede, indirizzo IP, CPU, latenza, servizi attivi ed eventuale manutenzione programmata.
+- **Server in evidenza**: ricerca rapida per nome server con visualizzazione dedicata o messaggio di assenza.
+- **Sezione avvisi**: elenco degli avvisi attivi oppure conferma visiva quando non ci sono segnalazioni.
 
-## React Compiler
+## Soglie di stato
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Offline**: `online === false`
+- **Critico**: CPU $\ge 90\%$
+- **Attenzione**: CPU $\ge 70\%$ (e $< 90\%$)
+- **OK**: CPU $< 70\%$
 
-## Expanding the Oxlint configuration
+## Struttura del progetto
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```text
+src/
+├── App.jsx              # Componente principale di composizione del pannello
+├── App.css              # Stili layout, schede, badge e sezioni
+├── main.jsx             # Punto d'ingresso React
+├── index.css            # Foglio di stile globale
+├── dati.js              # Dati di sistema, elenco server e avvisi
+├── calcoli.js           # Funzioni pure per stati, medie, ricerca e latenza
+├── Intestazione.jsx     # Header con stato generale e aggiornamento
+├── Riepilogo.jsx        # Card riepilogative di stato e prestazioni
+├── GrigliaServer.jsx    # Griglia delle schede server
+├── SchedaServer.jsx     # Dettaglio singolo server e manutenzione
+├── BadgeStato.jsx       # Badge colorato per lo stato del server
+├── ServerInEvidenza.jsx # Box del server ricercato
+└── Avvisi.jsx           # Lista avvisi o stato senza avvisi
