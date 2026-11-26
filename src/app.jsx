@@ -38,3 +38,17 @@ export default function App() {
     </div>
   )
 }
+
+
+/* Risposte alle Domande:
+
+  1. Perché in React le props e i dati vanno trattati come immutabili:
+  modificare direttamente un oggetto aggiorna il valore in memoria ma non avvisa React,
+  che quindi non riesegue il render della pagina. Per aggiornare l'interfaccia alla modifica di un dato serve useState.
+  
+  2. Un solo file, src/calcoli.js, perché lo stato di ogni server è un dato derivato
+  calcolato dinamicamente da statoServer leggendo SOGLIE,
+  quindi tutti i componenti si aggiornano di conseguenza in automatico.
+
+  3. Passare solo la prop stato mantiene il componente semplice, riutilizzabile anche altrove e indipendente
+  dalla struttura interna dell'oggetto server, lasciando al padre il compito di calcolare lo stato.
